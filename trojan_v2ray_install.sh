@@ -1076,13 +1076,13 @@ function getHTTPSCertificate(){
             green "  开始申请证书, acme.sh 通过 http standalone mode 申请 "
             echo
 
-            ${configSSLAcmeScriptPath}/acme.sh --issue --standalone -d ${configSSLDomain}  --keylength ec-256 --server letsencrypt
+            ${configSSLAcmeScriptPath}/acme.sh --issue --standalone -d ${configSSLDomain}  --keylength ec-256 --server letsencrypt  --debug 2
             echo
 
             ${configSSLAcmeScriptPath}/acme.sh --installcert --ecc -d ${configSSLDomain} \
             --key-file ${configSSLCertPath}/${configSSLCertKeyFilename} \
             --fullchain-file ${configSSLCertPath}/${configSSLCertFullchainFilename} \
-            --reloadcmd "systemctl restart nginx.service"
+            --reloadcmd "systemctl restart nginx.service"  --debug 2
         
         elif [[ $1 == "webroot" ]] ; then
             green "  开始申请证书, acme.sh 通过 http webroot mode 申请, 请确保 web服务器例如nginx 已经运行在80端口 "
